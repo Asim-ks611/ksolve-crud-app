@@ -62,7 +62,7 @@ async function deleteUsers(req, res) {
           id:id,
         },
       })
-    res.json({deletedUser})
+    res.json({"Deleted user":deletedUser.username})
   }
 
 module.exports = {getAllUsers,

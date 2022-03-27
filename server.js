@@ -13,18 +13,23 @@ const app = express()
 const PORT = 3005;
 
 // INITIATING MIDDLEWARES
-app.use(cors());
 app.use(express.urlencoded({extended:false}))
+app.use(cors({
+    origin:"http://localhost:3000",
+    credentials: true
+}));
 app.use(express.json())
 app.use(cookieParser());
+
 // CUSTOM MIDDLEWARES
 app.use(myLogger)
 
-
 // USING ROUTER
+app.use("/auth",authRouter)
 app.use("/users",isLoggedIn,usersRouter)
 app.use("/notes",notesRouter)
-app.use("/auth",authRouter)
+
+
 
 app.listen(PORT,()=>{
     console.log(`Server is Running at http://localhost:${PORT}`);

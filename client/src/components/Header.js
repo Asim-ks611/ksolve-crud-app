@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom"
 import useAuth from "../auth/useAuth";
+import axios from "axios"
 
 
 const Header = () => {
@@ -23,8 +24,9 @@ const Header = () => {
 
   const logoutHandler = ()=>{
     if(window.confirm("Do you want to logout?")){
-      setAuth({})
-      return
+      axios.get("http://localhost:3000/auth/logout")
+       setAuth({})
+       return
     }else{
       return
     }

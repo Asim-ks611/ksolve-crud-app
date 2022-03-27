@@ -35,7 +35,7 @@ const Form = ({handleSubmit,noteData,handleChange}) => {
             <textarea
               name="note"
               id="form-tag"
-              rows="4"
+              rows="3"
               className=" appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-2 leading-tight focus:outline-none focus:bg-white"
               onChange={handleChange}
               value={noteData.note}

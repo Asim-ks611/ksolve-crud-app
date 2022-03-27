@@ -53,6 +53,7 @@ function Login() {
         JSON.stringify(loginCred),
         {
           headers: { "Content-Type": "application/json" },
+          withCredentials:true
         }
       );
       const user = await jwt_decode(response?.data?.token);

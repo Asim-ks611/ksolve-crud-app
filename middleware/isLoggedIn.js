@@ -1,7 +1,4 @@
 const jwt = require("jsonwebtoken");
-// const { PrismaClient } = require("@prisma/client");
-
-// let prisma = new PrismaClient();
 
 const isLoggedIn = async function (req, res, next) {
   try {
@@ -12,11 +9,6 @@ const isLoggedIn = async function (req, res, next) {
     }else{
       return res.status(401).json({ message: "Your are not authorized to visit this page!"});
     }
-    // let getUser = await prisma.user.findUnique({
-    //             where:{
-    //                 id:verifiedUser.id
-    //             }
-    //         }).catch(err=>new Error(err))
     next();
   } catch (error) {
     res.status(401).json({ message: "Unauthorized User", error: error.name });

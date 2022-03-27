@@ -2,13 +2,13 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
   referentialIntegrity = "prisma"
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["referentialIntegrity"]
 }
 
@@ -18,7 +18,7 @@ model Note {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   content   String?
-  User      User?     @relation(fields: [userId], references: [id], onDelete:Cascade )
+  User      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int?
 }
 
@@ -27,7 +27,13 @@ model User {
   username String
   email    String @unique
   password String
-  role     String @default("user")
+  role     Role   @default(guest)
   notes    Note[]
 }
- 
+
+enum Role {
+  admin
+  manager
+  engineer
+  guest
+}

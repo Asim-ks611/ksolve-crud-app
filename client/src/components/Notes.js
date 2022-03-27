@@ -18,7 +18,12 @@ const Notes = () => {
   const [modalData, setModalData] = useState({id:"",title:"",note:""})
   const URL = "http://localhost:3005";
 
+
+
+
+
   ///////////////// USE-EFFECT ///////////////////
+
   useEffect(() => {
     let reset = setTimeout(() => setMsg(""), 3000);
     return () => clearTimeout(reset);
@@ -26,7 +31,7 @@ const Notes = () => {
 
   useEffect(() => {
     axios
-      .get(`${URL}/notes`)
+      .get(`${URL}/notes`,{withCredentials:true})
       .then((res) => setAllNotes(res.data.notes))
       .catch((err) => console.log(err));
   }, [msg]);
@@ -121,6 +126,7 @@ const Notes = () => {
           {msg}
         </li>
       </ul>
+      
       <Form
         handleSubmit={handleSubmit}
         noteData={noteData}
