@@ -14,18 +14,18 @@ const Notes = () => {
   });
   const [allNotes, setAllNotes] = useState([]);
   const [msg, setMsg] = useState("");
+  const [errMsg, setErrMsg] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [modalData, setModalData] = useState({id:"",title:"",note:""})
   const URL = "http://localhost:3005";
 
-
-
-
-
   ///////////////// USE-EFFECT ///////////////////
 
   useEffect(() => {
-    let reset = setTimeout(() => setMsg(""), 3000);
+    let reset = setTimeout(() => {
+      setMsg("")
+      setErrMsg("")
+    }, 3000);
     return () => clearTimeout(reset);
   }, [msg]);
 
@@ -46,15 +46,16 @@ const Notes = () => {
         JSON.stringify(noteData),
         {
           headers: { "Content-Type": "application/json" },
+          withCredentials:true
         }
       );
       setNoteData({ userId: auth.id, title: "", note: "" });
       setMsg(response?.data?.message);
     } catch (err) {
       if (err) {
-        setMsg(err?.response?.data?.message);
+        setErrMsg(err?.response?.data?.message);
       } else {
-        setMsg("Registration Failed");
+        setErrMsg("Registration Failed");
       }
     }
   };
@@ -74,8 +75,14 @@ const Notes = () => {
     let id = e.target.id;
     if (window.confirm("Do you want to delete note?")) {
       axios
-        .delete(`${URL}/notes/${id}`)
-        .then((res) => setMsg(res.data.message));
+        .delete(`${URL}/notes/${id}`,
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials:true
+        }
+        )
+        .then((res) => setMsg(res?.data?.message))
+        .catch(err => setErrMsg(err?.response?.data?.message))
     } else {
       return;
     }
@@ -88,11 +95,15 @@ const Notes = () => {
       {
         title:modalData.title,
         note:modalData.note
+      },
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials:true
       })
       setMsg(res?.data?.message)
       setShowModal(!showModal)
     } catch (error) {
-      setMsg(error?.response?.data?.message)
+      setErrMsg(error?.response?.data?.message)
     }
 
   }
@@ -119,11 +130,14 @@ const Notes = () => {
   return (
     <>
       <ul>
+         <li className={msg ? "errmsg bg-green-400" : "offscreen"} aria-live="assertive">
+         {msg}
+       </li>
         <li
-          className={msg !== "" ? "errmsg" : "offscreen"}
+          className={errMsg ? "errmsg bg-red-400" : "offscreen"}
           aria-live="assertive"
         >
-          {msg}
+          {errMsg}
         </li>
       </ul>
       

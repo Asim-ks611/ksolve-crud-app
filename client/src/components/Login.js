@@ -44,7 +44,7 @@ function Login() {
 
   /////////////////////////-- AXIOS --////////////////////////////
   const URL = "http://localhost:3005";
-  //--LOGIN --//
+                      //--LOGIN --//
   const loginHandler = async (e) => {
     e.preventDefault();
     try {
@@ -81,15 +81,17 @@ function Login() {
         JSON.stringify(registerCred),
         {
           headers: { "Content-Type": "application/json" },
+          withCredentials:true
         }
       );
-      setMsg(response?.data?.message);
       setRegisterCred({
         username: "",
         email: "",
         password: "",
         confirmPassword: "",
-      });;
+      });
+      setMsg(response?.data?.message);
+      setIsFlipped(!isFlipped)
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");
@@ -122,12 +124,12 @@ function Login() {
   return (
     <>
       <ul>
-        <li className={msg ? "errmsg" : "offscreen"} aria-live="assertive">
-          {msg}
-        </li>
+         <li className={msg ? "errmsg bg-green-400" : "offscreen"} aria-live="assertive">
+         {msg}
+       </li>
         <li
           ref={errRef}
-          className={errMsg ? "errmsg" : "offscreen"}
+          className={errMsg ? "errmsg bg-red-400" : "offscreen"}
           aria-live="assertive"
         >
           {errMsg}

@@ -30,7 +30,7 @@ const authRegister = async (req, res) => {
       },
     })
     .catch((err) => console.log(err));
-  res.json({ username, message: "User added successfully" });
+  res.json({ username, message: "User added successfully, You can login now!" });
 };
 
 //////// ------- USER LOGIN -----------//////////

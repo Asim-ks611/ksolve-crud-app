@@ -1,5 +1,8 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
+// const { PrismaClient } = require('@prisma/client')
+// const prisma = new PrismaClient()
+
 
 datasource db {
   provider             = "mysql"
@@ -37,3 +40,17 @@ enum Role {
   engineer
   guest
 }
+/////// ----  queries examples ---- ////////
+// async function main() {
+//   // ... you will write your Prisma Client queries here
+//   const allUsers = await prisma.user.findMany()
+//   console.log(allUsers)
+// }
+
+// main()
+//   .catch((e) => {
+//     throw e
+//   })
+//   .finally(async () => {
+//     await prisma.$disconnect()
+//   })

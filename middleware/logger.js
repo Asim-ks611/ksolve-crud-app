@@ -2,7 +2,7 @@ const fs = require("fs");
 const jwt = require("jsonwebtoken");
 
 const logger = function (req, res, next) {
-  let token = req?.cookies?.jwt
+  let token = req?.cookies["jwt"]
   if (token === undefined) {
     let currentTime = Date.now();
     let method = req.method;
@@ -24,7 +24,7 @@ const logger = function (req, res, next) {
     });
     next();
   } else {
-    currentUser = jwt.verify(token,process.env.SECRET_KEY);
+    let currentUser = jwt.verify(token,process.env.SECRET_KEY);
     let currentTime = Date.now();
     let method = req.method;
     let path = req.url;

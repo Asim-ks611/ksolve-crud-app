@@ -10,4 +10,11 @@ A Crud App using React as a frontend and express as backend, with tools like Pri
    eg. in the above as with USER having many posts.
 
 #2 : CORS SET UP TO GET HTTP ONLY COOKIES
-   > a. 
+   > a. As middleware if we need to narrow the req, we have to pass origin.ie
+   ```app.use(cors({
+      origin:"http://localhost:3000",
+      credentials: true
+      }))```
+    > b. Here I passed my client server Ip as origin saying hey express allow req from this origin xxx:3000/*/*
+    > c. Also credential:true for getting cookies in response, and we also need to set
+    ```withCredentials:true``` in req headers option of axios requests from client side.

@@ -8,7 +8,7 @@
     "dev": "nodemon server.js"
   },
   "keywords": [],
-  "author": "Asim Shah <asimshah2468@gmail.com>",
+  "author": "Asim Shah <rockyas.shah476@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^3.11.1",
@@ -18,6 +18,8 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
+    "passport": "^0.5.2",
+    "passport-jwt": "^4.0.0",
     "prisma": "^3.11.0"
   }
 }

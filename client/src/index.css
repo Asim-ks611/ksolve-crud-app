@@ -11,8 +11,7 @@ body {
 
 .errmsg {
   width: 100%;
-  background-color: lightpink;
-  color: firebrick;
+  color: white;
   font-weight: bold;
   padding: 0.5rem;
   transition: 300ms;
@@ -21,4 +20,15 @@ body {
   position: absolute;
   left: -9999px;
   transition: 300ms;
+}
+
+.showform{
+  display: block;
+  padding: 16px;
+  transition: height 300ms ease;
+}
+.hideform{
+  display: none;
+  padding: 16px;
+  transition: height 300ms ease;
 }

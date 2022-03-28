@@ -38,7 +38,7 @@ async function addNotes(req, res) {
 }
   
 
-////// -- UPDATE NOTES -- //////
+////// -- UPDATE NOTE -- //////
 async function updateNotes(req, res) {
   const id = Number(req.params.id)
   const {title,note} = req.body

@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
   faUserPen,
-  faRightToBracket,
   faBed,
   faNoteSticky,
 } from "@fortawesome/free-solid-svg-icons";
@@ -54,7 +53,7 @@ const Header = () => {
           </div>
           <div
             className={
-              "lg:flex flex-grow items-center transition duration-200" +
+              "lg:flex flex-grow items-center" +
               (navbarOpen ? "flex" : " hidden")
             }
             id="example-navbar-danger"
@@ -91,16 +90,17 @@ const Header = () => {
               </span>
             </li> 
               :
-              <li className="nav-item">
-                <Link to={"/login"}>
-                <span
-                  className="cursor-pointer px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75"
-                >
-                  <FontAwesomeIcon icon={faRightToBracket} />{" "}
-                  <span className="ml-2">Login</span>
-                </span>
-                </Link>
-              </li>  
+              ""
+              // <li className="nav-item">
+              //   <Link to={"/login"}>
+              //   <span
+              //     className="cursor-pointer px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75"
+              //   >
+              //     <FontAwesomeIcon icon={faRightToBracket} />{" "}
+              //     <span className="ml-2">Login</span>
+              //   </span>
+              //   </Link>
+              // </li>  
 
               }
                 <li className="flex items-center">
@@ -109,7 +109,7 @@ const Header = () => {
                   src={avatar}
                   alt="avatar"
                 />
-                <span className="text-white text-sm font-bold">{auth?.username ? auth?.username : ``}</span>
+                <span className="text-white text-sm font-bold">{auth?.username ? auth?.username :""}</span>
               </li>
             </ul>
           </div>

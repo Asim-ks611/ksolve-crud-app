@@ -3,6 +3,7 @@ const cors = require( "cors")
 const myLogger =require( "./middleware/logger.js")
 const cookieParser = require('cookie-parser')
 const isLoggedIn = require("./middleware/isLoggedIn")
+require("./middleware/passportAuth")
 
 // IMPORTING ROUTERS
 const usersRouter = require('./routers/users.router')
@@ -13,20 +14,21 @@ const app = express()
 const PORT = 3005;
 
 // INITIATING MIDDLEWARES
+app.use(cookieParser());
 app.use(express.urlencoded({extended:false}))
 app.use(cors({
     origin:"http://localhost:3000",
     credentials: true
 }));
 app.use(express.json())
-app.use(cookieParser());
 
 // CUSTOM MIDDLEWARES
 app.use(myLogger)
 
 // USING ROUTER
 app.use("/auth",authRouter)
-app.use("/users",isLoggedIn,usersRouter)
+app.use(isLoggedIn)
+app.use("/users",usersRouter)
 app.use("/notes",notesRouter)
 
 

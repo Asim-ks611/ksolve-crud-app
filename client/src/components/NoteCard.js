@@ -16,7 +16,7 @@ const NoteCard = ({ allNotes, editHandler, deleteHandler }) => {
                 {note.title}
               </h2>
               <h4 className="text-gray-500 text-base font-semibold">
-                Note by {note.User.username}
+                Note by {note?.User?.username ? note?.User?.username : "deleted user"}
               </h4>
               <p className="mt-2 text-gray-800 ">{note.content}</p>
             </div>
