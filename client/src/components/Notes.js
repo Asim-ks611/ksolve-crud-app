@@ -25,7 +25,7 @@ const Notes = () => {
     let reset = setTimeout(() => {
       setMsg("")
       setErrMsg("")
-    }, 3000);
+    }, 5000);
     return () => clearTimeout(reset);
   }, [msg]);
 
@@ -60,6 +60,7 @@ const Notes = () => {
     }
   };
   ////////////----EDIT AND DELETE HANDLERS ---- ////////////
+  //-----------------------EDIT--------------------------//
   const editHandler = (e) => {
     let id = Number(e.target.id);
     let filteredNote = allNotes.filter(note=>note.id===id)[0]
@@ -71,6 +72,7 @@ const Notes = () => {
     setShowModal(!showModal);
   };
 
+  //-----------------------DELETE-------------------------//
   const deleteHandler = (e) => {
     let id = e.target.id;
     if (window.confirm("Do you want to delete note?")) {
@@ -88,6 +90,7 @@ const Notes = () => {
     }
   };
 
+  //-----------------------UPDATE-----------------------//
   const updateHandler =async (e) => {
     let id = e.target.id
     try {

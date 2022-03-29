@@ -43,14 +43,18 @@ async function updateNotes(req, res) {
   const id = Number(req.params.id)
   const {title,note} = req.body
   try {
-    const updatedNote = await prisma.note.update({
-      where:{id:id},
-      data:{
-        title:title,
-        content:note
-      }
-    })
-    res.status(200).json({message:"Note updated"})
+    if(title!=="" && note!==""){
+      const updatedNote = await prisma.note.update({
+        where:{id:id},
+        data:{
+          title:title,
+          content:note
+        }
+      })
+      res.status(200).json({message:"Note updated"})
+    }else{
+      res.status(200).json({message:"Title and note area must be provided"})
+    }
   } catch (error) {
     res.status(400).json({ message: `Note cannot be updated`,log:`Updated Note id:${updated.id}` })
   }
