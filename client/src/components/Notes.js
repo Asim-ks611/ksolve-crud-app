@@ -16,22 +16,22 @@ const Notes = () => {
   const [msg, setMsg] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [modalData, setModalData] = useState({id:"",title:"",note:""})
+  const [modalData, setModalData] = useState({ id: "", title: "", note: "" });
   const URL = "http://localhost:3005";
 
   ///////////////// USE-EFFECT ///////////////////
 
   useEffect(() => {
     let reset = setTimeout(() => {
-      setMsg("")
-      setErrMsg("")
+      setMsg("");
+      setErrMsg("");
     }, 5000);
     return () => clearTimeout(reset);
   }, [msg]);
 
   useEffect(() => {
     axios
-      .get(`${URL}/notes`,{withCredentials:true})
+      .get(`${URL}/notes`, { withCredentials: true })
       .then((res) => setAllNotes(res.data.notes))
       .catch((err) => console.log(err));
   }, [msg]);
@@ -46,7 +46,7 @@ const Notes = () => {
         JSON.stringify(noteData),
         {
           headers: { "Content-Type": "application/json" },
-          withCredentials:true
+          withCredentials: true,
         }
       );
       setNoteData({ userId: auth.id, title: "", note: "" });
@@ -61,81 +61,82 @@ const Notes = () => {
   };
   ////////////----EDIT AND DELETE HANDLERS ---- ////////////
   //-----------------------EDIT--------------------------//
-  const editHandler = (e) => {
-    let id = Number(e.target.id);
-    let filteredNote = allNotes.filter(note=>note.id===id)[0]
+  const editHandler = (id) => {
+    // let id = Number(e.target.id);
+    let filteredNote = allNotes.filter((note) => note.id === id)[0];
     setModalData({
-      id:filteredNote.id,
-      title:filteredNote.title,
-      note:filteredNote.content
-    })
+      id: filteredNote.id,
+      title: filteredNote.title,
+      note: filteredNote.content,
+    });
     setShowModal(!showModal);
   };
 
   //-----------------------DELETE-------------------------//
-  const deleteHandler = (e) => {
-    let id = e.target.id;
+  const deleteHandler = (id) => {
     if (window.confirm("Do you want to delete note?")) {
       axios
-        .delete(`${URL}/notes/${id}`,
-        {
+        .delete(`${URL}/notes/${id}`, {
           headers: { "Content-Type": "application/json" },
-          withCredentials:true
-        }
-        )
+          withCredentials: true,
+        })
         .then((res) => setMsg(res?.data?.message))
-        .catch(err => setErrMsg(err?.response?.data?.message))
+        .catch((err) => setErrMsg(err?.response?.data?.message));
     } else {
       return;
     }
   };
 
   //-----------------------UPDATE-----------------------//
-  const updateHandler =async (e) => {
-    let id = e.target.id
+  const updateHandler = async (e) => {
+    let id = e.target.id;
     try {
-      let res = await axios.put(`${URL}/notes/${id}`,
-      {
-        title:modalData.title,
-        note:modalData.note
-      },
-      {
-        headers: { "Content-Type": "application/json" },
-        withCredentials:true
-      })
-      setMsg(res?.data?.message)
-      setShowModal(!showModal)
+      let res = await axios.put(
+        `${URL}/notes/${id}`,
+        {
+          title: modalData.title,
+          note: modalData.note,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+      setMsg(res?.data?.message);
+      setShowModal(!showModal);
     } catch (error) {
-      setErrMsg(error?.response?.data?.message)
+      setErrMsg(error?.response?.data?.message);
     }
-
-  }
+  };
 
   ///// CHANGE HANDLER ///////
-  const handleChange = (e)=>{
-    if(e.target.id==="form-tag"){
+  const handleChange = (e) => {
+    if (e.target.id === "form-tag") {
       const value = e.target.value;
       setNoteData({
         ...noteData,
         [e.target.name]: value,
       });
     }
-    if(e.target.id==="modal-tag"){
+    if (e.target.id === "modal-tag") {
       const value = e.target.value;
       setModalData({
         ...modalData,
-        [e.target.name]:value
-      })
+        [e.target.name]: value,
+      });
     }
-  }
+  };
   //////////////////////////////////////////////////////////
 
   return (
     <>
       <ul>
-         <li className={msg ? "errmsg bg-green-400" : "offscreen"} aria-live="assertive">
-         {msg}
-       </li>
+        <li
+          className={msg ? "errmsg bg-green-400" : "offscreen"}
+          aria-live="assertive"
+        >
+          {msg}
+        </li>
         <li
           className={errMsg ? "errmsg bg-red-400" : "offscreen"}
           aria-live="assertive"
@@ -143,13 +144,13 @@ const Notes = () => {
           {errMsg}
         </li>
       </ul>
-      
+
       <Form
         handleSubmit={handleSubmit}
         noteData={noteData}
         handleChange={handleChange}
       />
-      <div className="m-2 p-2 bg-white  rounded-md">
+      
         <NoteCard
           allNotes={allNotes}
           setMsg={setMsg}
@@ -163,9 +164,12 @@ const Notes = () => {
           modalData={modalData}
           updateHandler={updateHandler}
         />
-      </div>
+      
     </>
   );
 };
 
 export default Notes;
+
+{/* <div className="m-2 p-2 bg-white  rounded-md ">
+</div> */}

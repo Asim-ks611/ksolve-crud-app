@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { faFloppyDisk,faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import {faFloppyDisk,faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Form = ({handleSubmit,noteData,handleChange}) => {
@@ -12,10 +12,10 @@ const showHandler = (e)=>{
   return (
   
     <div className="m-2 bg-white rounded-md">
-    <div className="w-auto h-14 flex bg-blue-600 rounded-t-md">
+    <div className="w-auto h-11 flex bg-blue-600 rounded-t-md">
         <p className='font-bold text-white text-xl self-center ml-auto'>Add Notes</p>
         <button className='ml-auto mr-5'>
-          <FontAwesomeIcon onClick={showHandler} className='h-8' icon={faPlusCircle} />
+          <FontAwesomeIcon onClick={showHandler} className='h-8 mt-1' icon={faPlusCircle} />
         </button>
       </div>
       <div className={showForm ? "showform" : "hideform"}>

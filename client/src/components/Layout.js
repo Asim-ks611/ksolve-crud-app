@@ -4,7 +4,7 @@ import Header from './Header';
 
 function Layout() {
   return (
-    <div className='max-h-screen overflow-auto'>
+    <div>
       <Header/>
       <main>
         <Outlet />

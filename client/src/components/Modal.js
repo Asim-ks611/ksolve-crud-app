@@ -7,14 +7,13 @@ export default function Modal({
   setShowModal,
   handleChange,
   modalData,
-  updateHandler
+  updateHandler,
 }) {
-
   return (
     <>
       {showModal ? (
         <>
-          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none backdrop-blur-sm">
             <div className="relative  my-6 mx-auto w-96 ">
               {/*content*/}
               <section className="m-3  py-4 px-6 bg-teal-300 shadow-xl shadow-slate-500 rounded-lg ">

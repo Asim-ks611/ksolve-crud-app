@@ -13,7 +13,7 @@ const logger = function (req, res, next) {
         let timeTaken = Date.now() - currentTime;
         let log = `${method}: ${path}: ${status}: ${timeTaken} ms: Guest:`;
         console.log(log);
-        fs.appendFile("./middleware/logger.txt", log + "\n", (err) => {
+        fs.appendFile("./logs/logger.txt", log + "\n", (err) => {
           if (err) {
             console.log(err);
           }

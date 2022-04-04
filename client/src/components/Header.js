@@ -33,7 +33,7 @@ const Header = () => {
 
   return (
     <>
-      <nav className="relative flex flex-wrap items-center justify-center px-2 py-3 bg-teal-500">
+      <nav className="relative flex flex-wrap items-center justify-center px-2 py-1 bg-teal-500">
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-center">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <Link to="/">
